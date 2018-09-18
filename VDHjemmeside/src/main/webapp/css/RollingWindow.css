@@ -1,0 +1,185 @@
+@charset "ISO-8859-1";
+
+
+html {
+	height: 100%;
+}
+body {
+	overflow: hidden;
+	margin: 10px;
+	display: flex;
+}
+
+
+.placeholder {
+	
+	position: relative;
+	height: -webkit-fill-available;
+	margin: 0;
+	overflow: hidden;	
+}
+
+
+.warningSection {
+	display: flex;
+	padding: 8px;
+	background-color: #ffe400;
+	border-style: solid;
+	border-radius: 40px;
+	overflow: visible;		
+	margin-bottom: 20px;	
+}
+.warning {
+	display: inline-block;
+	box-sizing: border-box;
+	width: 90%;
+	float: left;
+	padding-left: 10px;
+
+}
+.warning p {
+		font-family: sans-serif, serif,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial;
+	
+}
+
+p.warningTitle{
+	font-weight: 800;
+	
+	margin-bottom: 0px;
+		
+	
+}
+p.warningText{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	
+}
+p.warningLastUpdated{
+	margin-top: 8px;
+	font-style: italic;
+	
+}
+
+.numberOfWarnings {
+	display: inline-block;
+	box-sizing: border-box;
+	width: 10%;
+	float: left;
+	vertical-align: middle;
+	margin: auto;
+	
+}
+
+
+.numberOfWarnings p {
+	display: block;
+	overflow: visible;
+	font-size: 25px;
+	font-weight: 700;
+	padding-left: 10px;
+}
+
+
+.animation {
+	position: relative;
+	width: 100%;
+	margin: 0;
+	overflow: visible;
+	
+	
+	/* Starting position */
+	/*transform: translateY(100%); */
+	
+	/* Apply animation to this element */
+	
+	animation-name: scrollText;
+	animation-duration: 6s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	
+}
+
+
+
+/* Standard syntax */
+@keyframes scrollText {
+    0%   {transform: translateY(100vh); }
+    100% {transform: translateY(-100%); }
+}
+
+
+
+
+.notification {
+	padding: 15px;
+	margin: 2%;
+	position: relative;
+}
+
+.notification p.title {
+	font-size: 150%;
+	font-weight: bold;
+	font-family: sans-serif, serif,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial;
+
+	display: inline;
+	
+}
+
+.notification p.description {
+
+	float: center;
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	box-sizing: border-box;
+	font-family: arial;
+	
+}
+
+.notification p.timeOfLastUpdate {
+	font-style: italic;
+	font-family: arial;
+	color: #5b5b5b;
+	display: block;
+	
+}
+
+.animationSection{
+	display:block;
+	float: left;
+	box-sizing: border-box;
+	height: inherit;
+	width: -webkit-fill-available;
+}
+
+.animationHeader {
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+
+.animationHeader p {
+	
+	text-align: center;
+	color: #5e5e5e;
+	font-weight: 300;
+	font-size: 32px;
+	font-family: sans-serif, serif,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial;
+	
+	margin-bottom: 0;
+	margin-top: 0;
+	border-color: black;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+
+.animationArea{
+	overflow:hidden;
+	//height: 100%;
+	display: flex;
+	min-height: -webkit-fill-available;
+}
+
+
+

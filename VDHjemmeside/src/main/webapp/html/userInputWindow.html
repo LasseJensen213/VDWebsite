@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<link rel="stylesheet" type="text/css" href="../css/UserInputWindow.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../jQuery/UserInputWindow.js"></script>
+
+<title>Lasse's Hjemmeside</title>
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<h1>Indstillinger</h1>
+		</div>
+		<div class="stateTitle">
+			<p>Indsatsniveau</p>
+		</div>
+		<div class="state-container">
+
+			<div class="stateNavBar">
+
+				<div class="dropdown">
+					<button class="dropbtn">
+						Forhøjet indsatsniveau <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+						<a href="#">Normalt indsatsniveau</a> <a href="#">Forhøjet
+							indsatsniveau</a> <a href="#">Højt indsatsniveau</a>
+					</div>
+
+				</div>
+				<div class="time-container">
+					<form>
+						<input type="datetime-local" placeholder="dd-mm-åååå" name="time">
+						<button type="submit">Gem</button>
+						<button type="button" id="timeNow">Nu</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="textEditorTitle">
+			<p>Fritekst</p>
+
+		</div>
+		<div class="textEditor">
+
+			<div class="textArea">
+				<div class="textEditorToolbar">
+					<a href="#" id=textsize>Tekststørrelse</a> 
+					<a href="#" id="strong"><i class="fa fa-bold"></i></a>
+					<a href="#" id="italic"><i class="fa fa-italic"></i></a> 
+					<a href="#" id="strong"><i class="fa fa-underline"></i></a>
+
+				</div>
+				<textarea rows="22" cols="74" maxlength="1628"></textarea>
+			</div>
+			<div class="textPreview"></div>
+		</div>
+
+	</div>
+
+
+</body>
+</html>
