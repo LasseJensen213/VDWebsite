@@ -2,8 +2,6 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import dataFetcher.RSSFeedParser;
 import dto.RSS.RSSFeedDTO;
@@ -11,15 +9,17 @@ import dto.RSS.RSSMessageDTO;
 import dto.datex.SituationDTO;
 import dto.datex.SituationRecordDTO;
 import dto.datex.SituationRecordType;
-import dto.datex.WarningDTO;
+import dto.server.Server;
 import interfaces.IObserver;
+import interfaces.IPersistency;
+import rest.model.RestStateLevel;
 
 public class Controller implements IObserver{
 	
 	
 	//Singleton class
 	private static Controller single_instance = null;
-	
+	private IPersistency server = new Server();
 	
 
 	
@@ -117,6 +117,10 @@ public class Controller implements IObserver{
 	}
 
 
+	public void insertServerElement(RestStateLevel restStateLevel) {
+		server.insertElement(restStateLevel);
+	}
+	
 
 
 	public List<SituationDTO> getNotifications() {

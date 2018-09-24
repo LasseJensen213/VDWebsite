@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -15,6 +17,7 @@ import javax.ws.rs.core.Response.Status;
 import controller.Controller;
 import dto.RSS.RSSMessageDTO;
 import dto.datex.SituationDTO;
+import rest.model.RestStateLevel;
 
 
 
@@ -53,6 +56,22 @@ public class BackendResource {
 		return resp.build();
 	}
 	
+	
+	@Path("addStateLevel")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addStateLevel(RestStateLevel restStateLevel) {
+		Controller ctrl = Controller.getInstance();
+		ResponseBuilder resp;
+		Logger.getLogger(BackendResource.class.getName()).log(Level.INFO,restStateLevel.toString());
+		
+		ctrl.insertServerElement(restStateLevel);
+
+		resp = Response.status(Status.OK);
+		
+		return resp.build();
+		
+	}
 	
 	
 }

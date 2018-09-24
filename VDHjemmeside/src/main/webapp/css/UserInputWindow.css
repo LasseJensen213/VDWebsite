@@ -17,6 +17,7 @@ body {
 	width: inherit;
 	position: absolute;
 	overflow: hidden;
+	padding: 0px 20px;
 }
 
 .title {
@@ -24,19 +25,21 @@ body {
 }
 
 .title h1 {
-	padding: 0px 20px;
 	text-align: left;
 }
 
+.stateTitle {
+	overflow: hidden;
+	margin: 20px 0px;
+}
 .state-container {
 	/*background-color: white;*/
 	overflow: auto;
-	margin: 20px;
 	margin-top: 0;
 	border-radius: 5px;
 	-webkit-box-shadow: 1px 2px 2px 2px rgba(0, 0, 0, 0.21);
-	   -moz-box-shadow: 1px 2px 2px 2px rgba(0, 0, 0, 0.21);
-	        box-shadow: 1px 2px 2px 2px rgba(0, 0, 0, 0.21);
+	-moz-box-shadow: 1px 2px 2px 2px rgba(0, 0, 0, 0.21);
+	box-shadow: 1px 2px 2px 2px rgba(0, 0, 0, 0.21);
 }
 
 .state {
@@ -59,10 +62,7 @@ body {
 	text-decoration: none;
 }
 
-.stateTitle {
-	overflow: hidden;
-	margin: 20px 20px 0px 20px;
-}
+
 
 .stateTitle p {
 	margin: 0;
@@ -80,7 +80,14 @@ body {
 
 .time-container {
 	box-sizing: border-box;
+
 }
+
+.time-continer input {
+	margin: auto;
+	vertical-align: middle;
+}
+
 
 .dropdown .dropbtn {
 	font-size: 16px;
@@ -126,12 +133,21 @@ body {
 	float: right;
 }
 
-.stateNavBar input[type=datetime-local] {
+.stateNavBar input[type=date]{
 	padding: 6px;
 	margin-top: 8px;
 	font-size: 13px;
 	border: none;
 }
+.stateNavBar input[type=time]{
+	padding: 6px;
+	margin-top: 8px;
+	font-size: 13px;
+	border: none;
+}
+
+
+
 
 .stateNavBar .time-container button {
 	float: right;
@@ -156,7 +172,7 @@ body {
 
 .textEditorTitle {
 	overflow: hidden;
-	margin: 20px 20px 0px 20px;
+	margin: 20px 0px;
 }
 
 .textEditorTitle p {
@@ -166,27 +182,35 @@ body {
 	font-weight: 700;
 }
 
-
 .textEditor {
 	margin: auto;
-	text-align: center;	
+	text-align: center;
 }
 
 .textEditorToolbar {
 	display: block;
 	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(169, 169, 169);
 	overflow: auto;
 }
 
-.textEditorToolbar a {
-	float: left;	
-	padding: 14px 16px;
-	border-style: solid;
-	border-width: 1px;
+
+ 
+
+.textDecoration {
 }
 
-
-
+.textDecoration a {
+	float: left;
+	padding: 14px 16px;
+	border-left-style: solid;
+	border-width: 1px;
+	border-color: rgb(169, 169, 169);
+}
+#underlined {
+	border-right-style: solid;
+}
 
 .textArea {
 	overflow: visible;
@@ -198,10 +222,12 @@ body {
 	display: block;
 	overflow: visible;
 	box-sizing: border-box;
-
-	
 }
 
+.actionButtons {
+	text-align: left;
+}
 
-
-
+.textPreview {
+	border-style: solid;
+}

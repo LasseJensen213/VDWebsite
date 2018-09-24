@@ -27,43 +27,64 @@
 		<div class="state-container">
 
 			<div class="stateNavBar">
+				<form id="state">
+					<div class="dropdown">
+						<button class="dropbtn" type="button" val="NORMAL_STATE_LEVEL" id="stateButton">
+							Normalt indsatsniveau <i class="fa fa-caret-down"></i>
+						</button>
+						<div class="dropdown-content">
+							<a href="#" id="normalState">Normalt indsatsniveau</a> <a
+								href="#" id="raisedState">Forhøjet indsatsniveau</a> <a href="#"
+								id="highestState">Højt indsatsniveau</a>
+						</div>
 
-				<div class="dropdown">
-					<button class="dropbtn">
-						Forhøjet indsatsniveau <i class="fa fa-caret-down"></i>
-					</button>
-					<div class="dropdown-content">
-						<a href="#">Normalt indsatsniveau</a> <a href="#">Forhøjet
-							indsatsniveau</a> <a href="#">Højt indsatsniveau</a>
 					</div>
-
-				</div>
-				<div class="time-container">
-					<form>
-						<input type="datetime-local" placeholder="dd-mm-åååå" name="time">
-						<button type="submit">Gem</button>
+					<div class="time-container">
+						<input id="date" type="date" placeholder="åååå-mm-dd">
+						<input id="time" type="time" placeholder="tt:mm">
+						<button type="submit" id="submit">Gem</button>
 						<button type="button" id="timeNow">Nu</button>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
 		<div class="textEditorTitle">
 			<p>Fritekst</p>
 
+
 		</div>
 		<div class="textEditor">
-
 			<div class="textArea">
 				<div class="textEditorToolbar">
-					<a href="#" id=textsize>Tekststørrelse</a> 
-					<a href="#" id="strong"><i class="fa fa-bold"></i></a>
-					<a href="#" id="italic"><i class="fa fa-italic"></i></a> 
-					<a href="#" id="strong"><i class="fa fa-underline"></i></a>
+					<div class="dropdown">
+						<button class="dropbtn">
+							Skriftstørrelse <i class="fa fa-caret-down"></i>
+						</button>
+						<div class="dropdown-content">
+							<a class="textSize" id="h1" href="#"><h1>Header 1</h1></a> <a
+								class="textSize" id="h2" href="#"><h2>Header 2</h2></a> <a
+								class="textSize" id="h3" href="#"><h3>Header 3</h3></a> <a
+								class="textSize" id="h4" href="#"><h4>Header 4</h4></a> <a
+								class="textSize" id="h5" href="#"><h5>Header 5</h5></a> <a
+								class="textSize" id="h6" href="#"><h6>Header 6</h6></a>
+						</div>
 
+					</div>
+					<div class="textDecoration">
+						<a href="#" id="bold"><i class="fa fa-bold"></i></a> <a href="#"
+							id="italic"><i class="fa fa-italic"></i></a> <a href="#"
+							id="underlined"><i class="fa fa-underline"></i></a>
+					</div>
 				</div>
-				<textarea rows="22" cols="74" maxlength="1628"></textarea>
+				<textarea id="textArea" rows="33" cols="95" maxlength="3069"></textarea>
+				<div class="actionButtons">
+					<button id="preview">Preview</button>
+					<button id="saveText">Gem</button>
+				</div>
 			</div>
-			<div class="textPreview"></div>
+			<div class="textPreview">
+				<p>Empty paragraph</p>
+			</div>
 		</div>
 
 	</div>

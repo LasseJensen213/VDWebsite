@@ -18,35 +18,35 @@ import dto.datex.TextualDescriptionDTO;
 
 public class SituationHandler extends DefaultHandler{
 
-	
+
 	//Information about the situation
 	private List<SituationDTO> situationList = null;
 	private List<String> idMap = new ArrayList<>();
 	private int iterator = 0;
 
 	private SituationDTO situation= null;
-	
+
 	//Information about the situation record
 	private List<SituationRecordDTO> situationRecordList = null;
 	private SituationRecordDTO situationRecord = null;
-	
+
 	//Information about the situation extension. 
 	private SituationExtensionDTO situationExtension= null;
-	
+
 	//Textual description. 
 	//List of textualdescriptions. The list shall be added to 1 situationExtension
 	private List<TextualDescriptionDTO> textualDescriptionDTOList = null;
 	private TextualDescriptionDTO textualDescriptionDTO = null;
-	
-	
-	
+
+
+
 
 	//Used to collect information from different values. 
 	private StringBuilder content = new StringBuilder();
-	
-	
+
+
 	@Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException{
+	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException{
 		if(qName.equalsIgnoreCase("situation")) {
 			//We met a new situation.
 			situation = new SituationDTO();
@@ -54,7 +54,7 @@ public class SituationHandler extends DefaultHandler{
 			situation.setSituationID(id);
 			situationRecordList = new ArrayList<>();
 			iterator++;
-			
+
 
 
 
@@ -62,14 +62,14 @@ public class SituationHandler extends DefaultHandler{
 			if(situationList == null) {
 				situationList = new ArrayList<>();
 			}
-			
-			
+
+
 		} else if(qName.equalsIgnoreCase("situationRecord")) {
 			//We met a new situationExtension. Initialize new DTO's. 
 			situationRecord = new SituationRecordDTO();
 			String type = attributes.getValue("xsi:type");
 			try {
-			situationRecord.setType(SituationRecordType.fromString(type));
+				situationRecord.setType(SituationRecordType.fromString(type));
 			}
 			catch(IllegalArgumentException e) {
 				e.printStackTrace();
@@ -81,23 +81,23 @@ public class SituationHandler extends DefaultHandler{
 			iterator++;
 			//We met a new situationExtension. Initialize new DTO's. 
 			situationExtension = new SituationExtensionDTO();
-			
-	
+
+
 		} else if(qName.equalsIgnoreCase("textualDescriptionsOfSituation")) {
 			//We met a new situation extension. Therefore create new list. 
 			textualDescriptionDTOList = new ArrayList<>();
-			
+
 		} else if(qName.equalsIgnoreCase("textualDescriptions")) {
 			//We met a new textualDescription. initialize object
 			textualDescriptionDTO = new TextualDescriptionDTO();
-			
+
 			//The textual description has a language. Following assigns it to the textual description
 			String language = attributes.getValue("lang");
 			if(language == null) {
 				language = "en-US";
 			}
 			textualDescriptionDTO.setLanguage(language);
-			
+
 		} else if(qName.equalsIgnoreCase("messageText")) {
 			content.setLength(0);
 		} else if(qName.equalsIgnoreCase("locationText")) {
@@ -111,14 +111,14 @@ public class SituationHandler extends DefaultHandler{
 		} else if(qName.equalsIgnoreCase("regionText")) {
 			content.setLength(0);
 		}
-		
-		
-		
+
+
+
 	}
-	
+
 	@Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
-		
+	public void endElement(String uri, String localName, String qName) throws SAXException {
+
 		//Do we already have the ID
 		if(qName.equalsIgnoreCase("situation")) {
 			for(String s : idMap) {
@@ -127,12 +127,12 @@ public class SituationHandler extends DefaultHandler{
 					return;
 				}
 			}
-		
+
 			//We met the end tag of the situation. We should therefore add it to the list.
 			situation.setSituationRecordList(situationRecordList);
 			situationList.add(situation);
 			idMap.add(situation.getSituationID());
-			
+
 		} else if(qName.equalsIgnoreCase("situationRecord")) {
 			//We met the end tag of the situationrecord. We should therefore add it to the list.
 			situationRecordList.add(situationRecord);
@@ -153,29 +153,35 @@ public class SituationHandler extends DefaultHandler{
 					//Replace the text
 					description = description.replace(locationtext, "");
 					description = description.trim();
-					
+
 					//Set the first letter to upper case
-					startChar = description.substring(0, 1).toUpperCase();
-					description = startChar + description.substring(1);
+					try {
+						startChar = description.substring(0, 1).toUpperCase();
+						description = startChar + description.substring(1);
+
+					}
+					catch(StringIndexOutOfBoundsException e) {
+						e.printStackTrace();
+					}
 					situationExtension.getTextualDescriptionList().get(i).setMessageText(description);
-					
+
 				}
 
 			}
-			
+
 			//We met the end tag of the situationExtension. We should therefore add it to the list.
 			situation.setSituationExtensionDTO(situationExtension);
-			
-			
+
+
 
 		} else if(qName.equalsIgnoreCase("textualDescriptionsOfSituation")) {
 			//End tag of textualDescriptionsOfSituation met. Add the textualDescriptionsOfSituation to the situationExtension. 
 			situationExtension.setTextualDescriptionList(textualDescriptionDTOList);
-			
+
 		} else if(qName.equalsIgnoreCase("textualDescriptions")) {
 			//End tag of textualDescriptions. Add the textualDescriptions to the list of textualDescriptionsOfSituation
 			textualDescriptionDTOList.add(textualDescriptionDTO);
-			
+
 		} else if(qName.equalsIgnoreCase("messageText")) {
 			textualDescriptionDTO.setMessageText(content.toString());
 		} else if(qName.equalsIgnoreCase("locationText")) {
@@ -190,10 +196,10 @@ public class SituationHandler extends DefaultHandler{
 			textualDescriptionDTO.setRegionText(content.toString());
 		}
 	}
-	
-	
+
+
 	@Override
-    public void characters(char ch[], int start, int length) throws SAXException {
+	public void characters(char ch[], int start, int length) throws SAXException {
 		//Set the text 
 		content.append(ch, start, length);
 	}
@@ -213,7 +219,7 @@ public class SituationHandler extends DefaultHandler{
 			}
 			int doubleSpace = sBuilder.indexOf("   ");
 			sBuilder.delete(doubleSpace, sBuilder.length());
-			
+
 			textualDescriptionDTO.setMessageText(sBuilder.toString());
 			bMessageText = false;
 		} else if(bLocationText) {
@@ -267,12 +273,12 @@ public class SituationHandler extends DefaultHandler{
 	 */
 
 
-	
-	
-	 
-	
-	
-	
-	
+
+
+
+
+
+
+
 
 }
