@@ -3,7 +3,8 @@ package dto.server;
 public enum StateLevel {
 	NORMAL_STATE_LEVEL,
 	RAISED_STATE_LEVEL,
-	HIGH_STATE_LEVEL;
+	HIGH_STATE_LEVEL,
+	NULL_LEVEL;
 
 	
 	

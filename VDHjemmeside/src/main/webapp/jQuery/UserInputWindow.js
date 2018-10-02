@@ -137,7 +137,10 @@ $(document).ready(function(){
 	$("#preview").click(function() {
 		 console.log($("#textArea").val());
 		 $(".textPreview").html("");
-		 $(".textPreview").html($("#textArea").val());
+		 $(".textPreview").show();
+
+		 console.log($("#textArea").val());
+		 $(".textPreview").append("<pre>" + $("#textArea").val() + "</pre>");
 	});
 
 });
@@ -165,7 +168,7 @@ function setTimeNow() {
 
 function insertAtCursor(element, newText) {
 	var startTag = "<" + newText + ">";
-	var endTag = "<\\" + newText + ">";
+	var endTag = "</" + newText + ">";
 	
 	
 	var start = element.prop("selectionStart")
@@ -181,6 +184,41 @@ function insertAtCursor(element, newText) {
 	
 }
 
+
+
+
+$(document).ready(function(){
+	$("#saveText").click(function() {
+		var userText =  "<pre>" + $("#textArea").val() + "</pre>"
+
+		
+		var obj = {"htmlText": userText};
+		var json = JSON.stringify(obj);
+		console.log(json);
+
+
+
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:8080/VDHjemmeside/rest/backend/saveUserText",
+			data: json,
+			contentType: "application/json; charset=utf-8",
+			crossDomain: true,
+			dataType: json,
+			success: function (data, status, jqXHR) {
+
+				alert(success);
+			},
+
+			error: function (jqXHR, status) {
+				// error handler
+				console.log(jqXHR);
+				//alert('fail' + jqXHR.status);
+			}
+		});
+	});
+
+});
 
 
 

@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataFetcher.RSSFeedParser;
+import dataPersistence.Server;
 import dto.RSS.RSSFeedDTO;
 import dto.RSS.RSSMessageDTO;
 import dto.datex.SituationDTO;
 import dto.datex.SituationRecordDTO;
 import dto.datex.SituationRecordType;
-import dto.server.Server;
+import dto.server.StateLevelDTO;
 import interfaces.IObserver;
 import interfaces.IPersistency;
 import rest.model.RestStateLevel;
+import rest.model.RestUserText;
 
 public class Controller implements IObserver{
 	
@@ -119,6 +121,17 @@ public class Controller implements IObserver{
 
 	public void insertServerElement(RestStateLevel restStateLevel) {
 		server.insertElement(restStateLevel);
+	}
+	
+	public StateLevelDTO getState() {
+		return server.getStateLevel();
+	}
+	
+	public void saveUserText(RestUserText restUserText) {
+		server.saveUserText(restUserText);
+	}
+	public RestUserText getUserText() {
+		return server.getUserText();
 	}
 	
 

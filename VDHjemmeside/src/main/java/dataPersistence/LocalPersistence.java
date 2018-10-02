@@ -1,7 +1,5 @@
 package dataPersistence;
 
-import dto.server.Server;
-
 public class LocalPersistence {
 	
 	private Server serverDTO;

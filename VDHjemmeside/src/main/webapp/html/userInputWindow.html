@@ -17,10 +17,14 @@
 <title>Lasse's Hjemmeside</title>
 </head>
 <body>
+	<div class="topnav">
+		<a href="/VDHjemmeside/">Hjem</a> <a class="active" href="#settings">Indstillinger</a>
+		<a href="#statistics">Statistik</a>
+	
+
+	</div>
 	<div class="container">
-		<div class="title">
-			<h1>Indstillinger</h1>
-		</div>
+
 		<div class="stateTitle">
 			<p>Indsatsniveau</p>
 		</div>
@@ -29,7 +33,8 @@
 			<div class="stateNavBar">
 				<form id="state">
 					<div class="dropdown">
-						<button class="dropbtn" type="button" val="NORMAL_STATE_LEVEL" id="stateButton">
+						<button class="dropbtn" type="button" val="NORMAL_STATE_LEVEL"
+							id="stateButton">
 							Normalt indsatsniveau <i class="fa fa-caret-down"></i>
 						</button>
 						<div class="dropdown-content">
@@ -40,8 +45,8 @@
 
 					</div>
 					<div class="time-container">
-						<input id="date" type="date" placeholder="ееее-mm-dd">
-						<input id="time" type="time" placeholder="tt:mm">
+						<input id="date" type="date" placeholder="ееее-mm-dd"> <input
+							id="time" type="time" placeholder="tt:mm">
 						<button type="submit" id="submit">Gem</button>
 						<button type="button" id="timeNow">Nu</button>
 					</div>

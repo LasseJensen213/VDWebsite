@@ -18,6 +18,7 @@ import controller.Controller;
 import dto.RSS.RSSMessageDTO;
 import dto.datex.SituationDTO;
 import rest.model.RestStateLevel;
+import rest.model.RestUserText;
 
 
 
@@ -63,7 +64,7 @@ public class BackendResource {
 	public Response addStateLevel(RestStateLevel restStateLevel) {
 		Controller ctrl = Controller.getInstance();
 		ResponseBuilder resp;
-		Logger.getLogger(BackendResource.class.getName()).log(Level.INFO,restStateLevel.toString());
+//		Logger.getLogger(BackendResource.class.getName()).log(Level.INFO,restStateLevel.toString());
 		
 		ctrl.insertServerElement(restStateLevel);
 
@@ -73,6 +74,47 @@ public class BackendResource {
 		
 	}
 	
+	@Path("saveUserText")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response saveUserText(RestUserText restUserText) {
+		Controller ctrl = Controller.getInstance();
+		ResponseBuilder resp;
+		Logger.getLogger(BackendResource.class.getName()).log(Level.INFO,restUserText.toString());
+		
+		ctrl.saveUserText(restUserText);
+
+		resp = Response.status(Status.OK);
+		
+		return resp.build();
+
+	}
+	
+	@Path("getUserText")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUserText() {
+		Controller ctrl = Controller.getInstance();
+		ResponseBuilder resp;
+		
+		resp = Response.status(Status.OK).entity(ctrl.getUserText());
+		
+		return resp.build();
+		
+		
+	}
+	
+	@Path("getCurrentState")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCurrrentState() {
+		Controller ctrl = Controller.getInstance();
+		ResponseBuilder resp;
+		
+		resp = Response.status(Status.OK).entity(ctrl.getState());
+		
+		return resp.build();
+	}
 	
 }
 

@@ -112,6 +112,13 @@ public class RSSMessageDTO {
 			text = text.replace(toBeReplaced, "");
 		}
 		
+		if(text.contains("<p")) {
+			int start = text.indexOf("<p");
+			int end = text.indexOf(">") + 1;
+			String toBeReplaced = text.substring(start,end);
+			text = text.replace(toBeReplaced, "");
+		}
+		
 		
 		
 		text = text.replace("<p>", "");
