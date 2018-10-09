@@ -144,7 +144,7 @@ public class Controller implements IObserver{
 		if(this.RSSFeed == null) {
 			return new ArrayList<>();
 		}
-		return this.RSSFeed.getMessages();
+		return this.RSSFeed.getValidMessages();
 	}
 	
 	

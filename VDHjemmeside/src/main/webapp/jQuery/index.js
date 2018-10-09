@@ -1,4 +1,7 @@
 var mouseInMenu = false;
+var updateTimerInterval;
+var dateTime;
+
 
 
 $(document).ready(function () {
@@ -20,7 +23,7 @@ $(document).ready(function () {
 		idleTimer = setTimeout(function () { 
 			$(".menuButton").hide();
 			$(".text").css("width","100%");
-			window.console&&console.log(mouseInMenu);
+			//window.console&&console.log(mouseInMenu);
 			if(!mouseInMenu) {
 				closeNav();
 			}
@@ -84,9 +87,9 @@ $(document).ready(function() {
 	}).then(function(data) {
 		$(".userText").html("");
 
-		console.log(data);
+		//console.log(data);
 		$(".userText").append(data.htmlText);
-	
+
 	});
 });
 
@@ -95,8 +98,8 @@ $(document).ready(function() {
 	$.ajax({
 		url: "http://localhost:8080/VDHjemmeside/rest/backend/getCurrentState"
 	}).then(function(data) {
-		console.log(data)
-		
+		//console.log(data)
+
 		var date = data.dateTime.substring(0,10);
 		date = date.replace("-","/");
 		date = date.replace("-","/");
@@ -123,43 +126,40 @@ $(document).ready(function() {
 
 
 		}
-		
-		var year = data.dateTime.substring(0,4);
-		var month = data.dateTime.substring(5,7);
-		var day = data.dateTime.substring(9,10);
-		var hour = data.dateTime.substring(11,13);
-		var minute = data.dateTime.substring(14,16);
+		dateTime = data.dateTime;
+		updateTimerInterval = setInterval(updateTimer, 1000);
 
-		var d = new Date(data.dateTime);
-		console.log("year: " + year);
-		console.log("month: " + month);
-		console.log("day: " + day);
-		console.log("hour: " + hour);
-		console.log("minute: " + minute);
-		
-		
-		
-		console.log("d: " + d);
 
-		console.log("now: " + +new Date());
-
-		var timeEllapsed = +new Date().getTime() - d;
-
-		console.log("Time ellapsed: " + timeEllapsed);
-		
-		$("#timeSpentInState").html("asfd");
-		
-	
 	});
-	
-	
-	 
-	 
-	 
-	// 
-
-
 });
+
+var updateTimer = function() {
+	var d = new Date(dateTime);
+
+
+	var timeEllapsed = +new Date().getTime() - d;
+
+	var days = Math.floor(timeEllapsed / (1000 * 60 * 60 * 24));
+	var hours = Math.floor((timeEllapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	var minutes = Math.floor((timeEllapsed % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeEllapsed % (1000 * 60)) / 1000);
+
+
+	var dateString = "Tid brugt i tilstand: ";
+	if(days != 0) {
+		dateString += days + " dage, ";
+	}
+	if(hours != 0) {
+		dateString += hours + " timer, ";
+	}
+	if(minutes != 0) {
+		dateString += minutes +" minutter, "
+	}
+	dateString += seconds + " sekunder.";
+	
+
+	$("#timeSpentInState").html(dateString);
+}
 
 
 

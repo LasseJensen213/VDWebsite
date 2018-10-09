@@ -24,7 +24,7 @@ body {
 
 
 .warningSection {
-	display: flex;
+	display: none;
 	padding: 8px;
 	background-color: #ffe400;
 	border-style: solid;

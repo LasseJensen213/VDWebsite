@@ -65,6 +65,7 @@ public class RSSMessageDTO {
 	public void setValid(boolean valid) {
 		this.valid = valid;
 	}
+	
 	public void splitDescription(String description) {
 		String expireStartID = "Udløber:</b> ";
 		String expireEndID = "</div>";

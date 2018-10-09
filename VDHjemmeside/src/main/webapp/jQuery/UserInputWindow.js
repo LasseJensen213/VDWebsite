@@ -84,11 +84,9 @@ $(document).ready(function() {
 
 
 $(document).ready(function(){
-	$('input[type=date]').val(new Date().toJSON().slice(0,10));
-	$('input[type=time]').val(new Date().toJSON().slice(11,16));
-
-
+	setTimeNow();
 });
+
 $(document).ready(function(){
 	$("#h1").click(function() {
 		insertAtCursor($("#textArea"),"h1");
@@ -157,12 +155,22 @@ $(document).ready(function(){
 var datetime =  $("#datetime").val();
 
 function setTimeNow() {
-	$('input[type=date]').val(new Date().toJSON().slice(0,10));
-	$('input[type=time]').val(new Date().toJSON().slice(11,16));
+	console.log(convertUTCDateToLocalDate(new Date()));
+	$('input[type=date]').val(convertUTCDateToLocalDate(new Date()).toJSON().slice(0,10));
+	$('input[type=time]').val(convertUTCDateToLocalDate(new Date()).toJSON().slice(11,16));
 
 }
 
+function convertUTCDateToLocalDate(date) {
+    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
 
+    var offset = date.getTimezoneOffset() / 60;
+    var hours = date.getHours();
+
+    newDate.setHours(hours - offset);
+
+    return newDate;   
+}
 
 
 

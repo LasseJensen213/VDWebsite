@@ -156,9 +156,10 @@ public class SituationHandler extends DefaultHandler{
 
 					//Set the first letter to upper case
 					try {
-						startChar = description.substring(0, 1).toUpperCase();
-						description = startChar + description.substring(1);
-
+						if(description.length()!=0) {
+							startChar = description.substring(0, 1).toUpperCase();
+							description = startChar + description.substring(1);
+						}
 					}
 					catch(StringIndexOutOfBoundsException e) {
 						e.printStackTrace();

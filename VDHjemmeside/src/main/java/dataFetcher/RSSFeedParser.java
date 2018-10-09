@@ -104,6 +104,9 @@ public class RSSFeedParser {
                         message.setGuid(guid);
                         message.setLink(link);
                         message.setTitle(title);
+                        if(message.isValid()) {
+                        	feed.getValidMessages().add(message);
+                        }
                         feed.getMessages().add(message);
                         event = eventReader.nextEvent();
                         continue;

@@ -13,7 +13,9 @@ public class RSSFeedDTO {
 	private final String pubDate;
 
 	private final List<RSSMessageDTO> entries = new ArrayList<RSSMessageDTO>();
-
+	private final List<RSSMessageDTO> validEntries = new ArrayList<RSSMessageDTO>();
+	
+	
 	public RSSFeedDTO(String title, String link, String description, String language, String copyright, String pubDate) {	
 		this.title = title;
 		this.link = link;
@@ -26,6 +28,11 @@ public class RSSFeedDTO {
 	public List<RSSMessageDTO> getMessages() {
 		return entries;
 	}
+	
+	public List<RSSMessageDTO> getValidMessages() {
+		return validEntries;
+	}
+	
 
 	public String getTitle() {
 		return title;

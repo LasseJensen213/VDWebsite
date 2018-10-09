@@ -87,7 +87,9 @@ body {
 	margin-bottom: auto;
 	display: inline-block;
 }
-
+.stateHistory {
+	display: none;
+}
 .stateHistory table {
 	border-style: solid;
 	width: 100%;
@@ -125,7 +127,9 @@ body {
 	text-overflow: ellipsis;
 }
 
-.userText pre, h1, h2, h3 {
+.userText pre, h1, h2, h3, h4, h5, h6, i, u, b{
+	font-family: arial;
+	
 	word-break: break-all;
 	display: inline-block;
 	overflow-wrap: break-word;

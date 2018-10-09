@@ -1,3 +1,11 @@
+var warningIndex = 0;				
+var numberOfWarnings = 0;
+var updateWarningsDisplayInterval;
+var fetchNotificationsInterval;
+var fetchWarningsInterval;
+
+
+
 $(document).ready(function() {
 	$.ajax({
 		url: "http://localhost:8080/VDHjemmeside/rest/backend/notifications"
@@ -26,14 +34,16 @@ $(document).ready(function() {
 
 		});
 	});
-	setInterval(function() { 
-
-		$.ajax({
-			url: "http://localhost:8080/VDHjemmeside/rest/backend/notifications"
-		}).then(handleNotificationData(data));
-	}, 60000);
+	clearInterval(fetchNotificationsInterval);
+	fetchNotificationsInterval = setInterval(fetchNotifications, 60000);
 });
 
+
+var fetchNotifications = function() {
+	$.ajax({
+		url: "http://localhost:8080/VDHjemmeside/rest/backend/notifications"
+	}).then(function(data) {handleNotificationData(data)});
+}
 
 function handleNotificationData(data) {
 	$(".notification").remove();
@@ -80,58 +90,67 @@ $(document).ready(function() {
 	$.ajax({
 		url: "http://localhost:8080/VDHjemmeside/rest/backend/warnings"
 	}).then(function(data) {
-		if (!$.trim(data)){ 
-			$(".warningSection").hide();
-		}
-		else {
-			$(".toBeRemoved").remove();
-			var numberOfWarnings = 0;
-			$.each(data, function(index, element) {
-				$(".toBeRemoved").remove();
-
-				var $title = $("<p/>").addClass("warningTitle");
-				var $description = $("<p/>").addClass("warningText");
-				var $timeOfLastUpdate = $("<p/>").addClass("warningLastUpdated");
-				var $warning = $("<div/>").addClass("toBeRemoved");
-
-				$title.text(element.title);
-				$description.text(element.description);
-				$timeOfLastUpdate.html(element.expire);
-
-				$warning.append($title, $description, $timeOfLastUpdate);
-
-				//window.console&&console.log(element);
-				currentWarnings[numberOfWarnings] = $warning;
-				numberOfWarnings = numberOfWarnings + 1;
-			});
-			$("#numberOfWarningsText").text(numberOfWarnings);
-			window.console&&console.log(currentWarnings);
-			
-			
-			var warningIndex = 0;				
-			$("#numberOfWarningsText").text(warningIndex + 1 + "/" + numberOfWarnings);
-			$(".warning").append(currentWarnings[warningIndex]);
-			warningIndex++;
-			setInterval(function() { 
-				if(warningIndex >= numberOfWarnings) {
-					warningIndex = 0;
-				}
-				$(".toBeRemoved").remove();
-				$(".warning").append(currentWarnings[warningIndex]);
-				$("#numberOfWarningsText").text(warningIndex + 1 + "/" + numberOfWarnings);
-				warningIndex++;
-			}, 1000);
-			
-		}
+		handleWarningData(data);
 	});
-	setInterval(function() { 
-
-		$.ajax({
-			url: "http://localhost:8080/VDHjemmeside/rest/backend/notifications"
-		}).then(handleNotificationData(data));
-	}, 60000);
+	clearInterval(fetchWarningsInterval);
+	fetchWarningsInterval = setInterval(fetchWarnings,60000);
 });
 
+var fetchWarnings = function() {
+	$.ajax({
+		url: "http://localhost:8080/VDHjemmeside/rest/backend/warnings"
+	}).then(function(data) {handleWarningData(data)});
+}
 
+function handleWarningData(data) {
+	console.log("Handling new data");
+	clearInterval(updateWarningsDisplayInterval);
+	numberOfWarnings = 0;
+
+
+	if (!$.trim(data)){ 
+		$(".warningSection").hide();
+	}
+	else {
+		$(".toBeRemoved").remove();
+		$.each(data, function(index, element) {
+			$(".toBeRemoved").remove();
+
+			var $title = $("<p/>").addClass("warningTitle");
+			var $description = $("<p/>").addClass("warningText");
+			var $timeOfLastUpdate = $("<p/>").addClass("warningLastUpdated");
+			var $warning = $("<div/>").addClass("toBeRemoved");
+
+			$title.text(element.title);
+			$description.text(element.description);
+			$timeOfLastUpdate.html(element.expire);
+
+			$warning.append($title, $description, $timeOfLastUpdate);
+
+			//window.console&&console.log(element);
+			currentWarnings[numberOfWarnings] = $warning;
+			numberOfWarnings = numberOfWarnings + 1;
+		});
+		$("#numberOfWarningsText").text(numberOfWarnings);
+		window.console&&console.log(currentWarnings);
+		
+		
+		$("#numberOfWarningsText").text(warningIndex + 1 + "/" + numberOfWarnings);
+		$(".warning").append(currentWarnings[warningIndex]);
+		warningIndex++;
+		updateWarningsDisplayInterval = setInterval(updateWarningsDisplay, 10000);
+		
+	}
+}
+
+var updateWarningsDisplay = function() {
+	if(warningIndex >= numberOfWarnings) {
+		warningIndex = 0;
+	}
+	$(".toBeRemoved").remove();
+	$(".warning").append(currentWarnings[warningIndex]);
+	$("#numberOfWarningsText").text(warningIndex + 1 + "/" + numberOfWarnings);
+	warningIndex++;
+}
 
 
